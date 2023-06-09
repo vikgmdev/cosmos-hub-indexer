@@ -1,0 +1,18 @@
+version: '3'
+services:
+  cosmos-db:
+    image: postgres:15.3
+    container_name: cosmos-db
+    volumes:
+      - cosmos_dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: cosmoshub
+      POSTGRES_HOST: cosmos-db
+      POSTGRES_PASSWORD: cosmos
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: cosmos
+    ports:
+      - 5432:5432
+
+volumes:
+  cosmos_dbdata:
