@@ -1,0 +1,96 @@
+{
+  "name": "cosmos-hub-indexer",
+  "version": "0.0.0",
+  "description": "A Cosmos Hub block and transactions indexer in Node.js.",
+  "main": "src/index.ts",
+  "scripts": {
+    "compile": "tsc",
+    "lint": "eslint . --max-warnings=0 --ext .js,.ts --ignore-path .gitignore --ignore-pattern '!.eslintrc.js' --ignore-pattern '!.prettierrc.js'",
+    "lint:fix": "npm run lint -- --fix",
+    "serve": "nodemon -r ts-node/register/transpile-only src/index.ts | pino-pretty",
+    "start": "export ENV=dev && npm run serve",
+    "test": "jest",
+    "db:migrate:latest": "knex migrate:latest --knexfile src/db/knexfile.ts | pino-pretty --translateTime 'SYS:HH:MM:ss'",
+    "db:migrate:rollback": "knex migrate:rollback --knexfile src/db/knexfile.ts | pino-pretty --translateTime 'SYS:HH:MM:ss'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run check -- -s"
+    }
+  },
+  "lint-staged": {
+    "*.{css,js,json,md,ts,yaml,yml}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{js,ts}": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikgmdev/cosmos-hub-indexer.git"
+  },
+  "author": "Victor Garcia <vikgm.dev@gmail.com>",
+  "engines": {
+    "node": "10.14.1 - 14.x",
+    "npm": "^6.8.0"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vikgmdev/cosmos-hub-indexer/issues"
+  },
+  "homepage": "https://github.com/vikgmdev/cosmos-hub-indexer#readme",
+  "dependencies": {
+    "@cosmjs/amino": "^0.30.1",
+    "@cosmjs/crypto": "^0.30.1",
+    "@cosmjs/encoding": "^0.30.1",
+    "@cosmjs/proto-signing": "^0.30.1",
+    "@cosmjs/stargate": "^0.30.1",
+    "axios": "^1.4.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv-safe": "^8.2.0",
+    "express": "^4.18.2",
+    "http-status-codes": "^2.2.0",
+    "knex": "^2.4.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.0",
+    "pino": "^8.14.1",
+    "pino-pretty": "^10.0.0",
+    "ramda": "^0.29.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/dotenv-safe": "^8.1.2",
+    "@types/express": "^4.17.15",
+    "@types/jest": "^29.5.2",
+    "@types/jest-json-schema": "^6.1.1",
+    "@types/morgan": "^1.9.4",
+    "@types/node": "^18.11.18",
+    "@types/node-uuid": "0.0.29",
+    "@types/ramda": "^0.28.20",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "jest-extended": "^4.0.0",
+    "jest-json-schema": "^6.1.0",
+    "jest-mock-extended": "^3.0.4",
+    "jest-ts-auto-mock": "^2.1.0",
+    "knex-mock-client": "^2.0.0",
+    "lint-staged": "^13.1.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.2",
+    "supertest": "^6.3.3",
+    "ts-auto-mock": "^3.7.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "ttypescript": "^1.5.15",
+    "typescript": "^5.1.3"
+  }
+}

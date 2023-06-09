@@ -1,0 +1,10 @@
+.env
+.eslintcache
+.idea/*
+dist
+node_modules
+src/coverage
+deployment/**/charts/
+deployment/**/requirements.lock
+
+.vscode
