@@ -60,7 +60,7 @@ Verify the DB is running:
 
 ```sh
 docker ps | grep 'cosmos-db'
-docker logs -f exodus-db
+docker logs -f cosmos-db
 ```
 
 ### Run the API service
